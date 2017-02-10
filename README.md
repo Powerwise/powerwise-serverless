@@ -19,3 +19,22 @@ But the development environment is a bit barebones. This project is a starting p
 * Add your lambda function to `serverless.yml`
 
 Have a look at the example `hello` function to see what the deal is.
+
+
+## deployment
+
+### Stages
+
+Project is configured with two environments: `staging` and `production`.
+
+The starting `serverless.yml` is configured to set the environment as `NODE_ENV` Lambda Environment Variable. This means you can use `process.env.NODE_ENV` like you would in a regular node application.
+
+#### Deploying to staging
+
+    npm run deploy:staging
+
+
+#### Deploying to production
+
+    npm run deploy:production
+
