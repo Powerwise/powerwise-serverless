@@ -1,0 +1,22 @@
+{
+  "name": "serverless-seed",
+  "version": "1.0.0",
+  "description": "NextFaze Serverless Seed. Bringing sanity to your serverless development experience.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha lib/**/*.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.nextfaze.com:nextfaze/serverless-seed.git"
+  },
+  "keywords": [
+    "amazon",
+    "aws",
+    "serverless",
+    "typescript",
+    "node"
+  ],
+  "author": "Michael Marner <mmarner@nextfaze.com>",
+  "license": "ISC"
+}
