@@ -7,7 +7,9 @@
     "prebuild": "npm run clean",
     "build": "npm run tsc",
     "clean": "rm -rf lib",
-    "test": "mocha lib/**/*.spec.js",
+    "mocha": "node_modules/.bin/mocha",
+    "pretest": "npm run build",
+    "test": "npm run mocha lib/**/*.spec.js",
     "serverless": "node_modules/.bin/serverless",
     "sls": "node_modules/.bin/sls",
     "tsc": "node_modules/.bin/tsc"
@@ -26,7 +28,11 @@
   "author": "Michael Marner <mmarner@nextfaze.com>",
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/mocha": "^2.2.39",
     "aws-sdk": "^2.11.0",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
     "serverless": "^1.6.1",
     "typescript": "^2.1.6"
   }
