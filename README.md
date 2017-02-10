@@ -20,21 +20,28 @@ But the development environment is a bit barebones. This project is a starting p
 
 Have a look at the example `hello` function to see what the deal is.
 
+## Testing
 
-## deployment
+Testing uses [mocha](https://mochajs.org/) to run your tests, and the project has the [chai](http://chaijs.com/) assertion library installed for you.
 
-### Stages
+Run your tests with a simple `npm test`.
+
+Create tests files in the same directory of whatever you are testing, and name them `[whatever].spec.ts`. For example, the tests for the `hello` lambda are contained in `src/lambdas/hello.spec.ts`
+
+## Stages
 
 Project is configured with two environments: `staging` and `production`.
 
 The starting `serverless.yml` is configured to set the environment as `NODE_ENV` Lambda Environment Variable. This means you can use `process.env.NODE_ENV` like you would in a regular node application.
 
-#### Deploying to staging
+## deployment
+
+### Deploying to staging
 
     npm run deploy:staging
 
 
-#### Deploying to production
+### Deploying to production
 
     npm run deploy:production
 
