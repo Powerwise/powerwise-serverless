@@ -7,6 +7,8 @@
     "prebuild": "npm run clean",
     "build": "npm run tsc",
     "clean": "rm -rf lib",
+    "deploy:production": "npm run build && npm run serverless -- deploy --stage production",
+    "deploy:staging": "npm run build && npm run serverless -- deploy --stage staging",
     "mocha": "node_modules/.bin/mocha",
     "pretest": "npm run build",
     "test": "npm run mocha lib/**/*.spec.js",
