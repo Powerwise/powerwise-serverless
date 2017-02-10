@@ -4,7 +4,8 @@
   "description": "NextFaze Serverless Seed. Bringing sanity to your serverless development experience.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha lib/**/*.spec.js"
+    "test": "mocha lib/**/*.spec.js",
+    "serverless": "node_modules/.bin/serverless"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,9 @@
     "node"
   ],
   "author": "Michael Marner <mmarner@nextfaze.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "aws-sdk": "^2.11.0",
+    "serverless": "^1.6.1"
+  }
 }
