@@ -4,8 +4,12 @@
   "description": "NextFaze Serverless Seed. Bringing sanity to your serverless development experience.",
   "main": "lib/index.js",
   "scripts": {
+    "prebuild": "npm run clean",
+    "build": "npm run tsc",
+    "clean": "rm -rf lib",
     "test": "mocha lib/**/*.spec.js",
-    "serverless": "node_modules/.bin/serverless"
+    "serverless": "node_modules/.bin/serverless",
+    "tsc": "node_modules/.bin/tsc"
   },
   "repository": {
     "type": "git",
@@ -22,6 +26,7 @@
   "license": "ISC",
   "devDependencies": {
     "aws-sdk": "^2.11.0",
-    "serverless": "^1.6.1"
+    "serverless": "^1.6.1",
+    "typescript": "^2.1.6"
   }
 }
