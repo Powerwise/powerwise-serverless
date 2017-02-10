@@ -9,6 +9,7 @@
     "clean": "rm -rf lib",
     "test": "mocha lib/**/*.spec.js",
     "serverless": "node_modules/.bin/serverless",
+    "sls": "node_modules/.bin/sls",
     "tsc": "node_modules/.bin/tsc"
   },
   "repository": {
