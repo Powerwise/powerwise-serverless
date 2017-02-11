@@ -30,8 +30,10 @@
   "author": "Michael Marner <mmarner@nextfaze.com>",
   "license": "ISC",
   "devDependencies": {
+    "@types/aws-sdk": "0.0.42",
     "@types/chai": "^3.4.34",
     "@types/mocha": "^2.2.39",
+    "@types/node": "^7.0.5",
     "aws-sdk": "^2.11.0",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
