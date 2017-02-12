@@ -23,17 +23,19 @@ provider:
 
   environment:
     NODE_ENV: ${opt:stage}
-
+    SPARKPOST_API_KEY: 652723242a73f42469fad3fd2d18e8b8a89022f0
+    REDIRECT: http://powerwise-demo.s3-website-us-east-1.amazonaws.com
 # you can overwrite defaults here
+  # defaults:
 #  stage: dev
-  # region: us-east-1
+    # region: ap-southeast-2
 
 # you can add statements to the Lambda function's IAM Role here
-#  iamRoleStatements:
-#    - Effect: "Allow"
-#      Action:
-#        - "s3:ListBucket"
-#      Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "ServerlessDeploymentBucket" } ] ]  }
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "*"
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
 #    - Effect: "Allow"
 #      Action:
 #        - "s3:PutObject"
@@ -64,6 +66,38 @@ functions:
           path: register
           integration: lambda
           cors: true
+  saveDevice:
+    handler: lib/lambdas.save_devices
+    events:
+      - http:
+          method: POST
+          path: save-devices
+          integration: lambda
+          cors: true
+  createEvent:
+    handler: lib/lambdas.create_event
+    events:
+      - http:
+          method: POST
+          path: create-event
+          integration: lambda
+          cors: true
+  respond:
+    handler: lib/lambdas.respond
+    events:
+      - http:
+          method: POST
+          path: respond
+          integration: lambda
+          cors: true
+  getDevices:
+    handler: lib/lambdas.getDevices
+    events:
+      - http:
+          method: POST
+          path: get-devices
+          integration: lambda
+          cors: true
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
@@ -89,16 +123,50 @@ resources:
     usersTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: usersTable
+        TableName: usersTable-${opt:stage}
         AttributeDefinitions:
           - AttributeName: email
             AttributeType: S
+          - AttributeName: type
+            AttributeType: S
         KeySchema:
+          - AttributeName: type
+            KeyType: HASH
           - AttributeName: email
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    shedEventsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: shedEventsTable-${opt:stage}
+        AttributeDefinitions:
+          - AttributeName: timestamp
+            AttributeType: N
+        KeySchema:
+          - AttributeName: timestamp
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
+    sheddingMappingTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: sheddingMappingTable-${opt:stage}
+        AttributeDefinitions:
+          - AttributeName: deviceId
+            AttributeType: S
+          - AttributeName: eventId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: eventId
+            KeyType: HASH
+          - AttributeName: deviceId
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 20
 #    NewResource:
 #      Type: AWS::S3::Bucket
 #      Properties:

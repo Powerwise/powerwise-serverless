@@ -4,7 +4,7 @@ async function _save_device(event) {
   const data   = event.body;
   const params = {
     TableName: `usersTable-${process.env.NODE_ENV}`,
-    Key: {email: data.email},
+    Key: {email: data.email, type: 'user'},
     UpdateExpression: 'set #a = :x',
     ExpressionAttributeNames: {'#a': 'devices'},
     ExpressionAttributeValues: {
